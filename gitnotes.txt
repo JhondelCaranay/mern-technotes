@@ -1,0 +1,11 @@
+basic commands
+    echo "# technotes-expressjs" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin https://github.com/JhondelCaranay/technotes-expressjs.git
+    git push -u origin 
+
+delete git
+    rm -fr .git

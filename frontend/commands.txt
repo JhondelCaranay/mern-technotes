@@ -1,0 +1,23 @@
+
+dependencies
+npm install react-router-dom@6  -- router
+
+font awersome dependencies
+npm i @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/react-fontawesome@latest
+
+redux toolkit
+npm install @reduxjs/toolkit react-redux
+
+
+
+
+hortcutkey
+highlight text
+ctrl + shift + l        -- highlight all text similar tohighlighted text
+
+
+thi is Mynotes
+thi is MyNotes
+thi is Mynotes
+thi is Mynotes
+thi is Mynotes
