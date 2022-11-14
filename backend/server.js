@@ -24,14 +24,15 @@ app.use(cookieParser()); // parse cookies
 // routes
 app.use("/", express.static(path.join(__dirname, "public"))); // way 1
 // app.use(express.static(path.join(__dirname, "public"))); 	way 2
-// app.use(express.static("public"));							way 3
+// app.use(express.static("public"));							way 3 , whis will works because public file is relative to root directory
+
 app.use("/", require("./routes/root"));
 
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/notes", require("./routes/noteRoutes"));
 
 // 404 page
-app.use("*", require("./routes/page404"));
+app.use("/", require("./routes/page404"));
 
 // custom logger middleware
 app.use(errorHandler);
@@ -47,8 +48,5 @@ mongoose.connection.once("open", () => {
 
 mongoose.connection.on("error", (err) => {
 	console.log(err);
-	logEvents(
-		`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
-		"mongoErrLog.log"
-	);
+	logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, "mongoErrLog.log");
 });

@@ -5,6 +5,7 @@ import { notesApiSlice } from "../notes/notesApiSlice";
 import { usersApiSlice } from "../users/usersApiSlice";
 
 const Prefetch = () => {
+	// this will fetch all users and notes one time, when component is mounted
 	useEffect(() => {
 		console.log("subscribing");
 		const notes = store.dispatch(notesApiSlice.endpoints.getNotes.initiate());

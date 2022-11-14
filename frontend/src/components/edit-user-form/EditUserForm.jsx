@@ -12,13 +12,10 @@ const USER_REGEX = /^[A-z]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 const EditUserForm = ({ user }) => {
-	const [updateUser, { isLoading, isSuccess, isError, error }] =
-		useUpdateUserMutation();
+	const [updateUser, { isLoading, isSuccess, isError, error }] = useUpdateUserMutation();
 
-	const [
-		deleteUser,
-		{ isSuccess: isDelSuccess, isError: isDelError, error: delerror },
-	] = useDeleteUserMutation();
+	const [deleteUser, { isSuccess: isSuccessDelete, isError: isErrorDelete, error: errorDelete }] =
+		useDeleteUserMutation();
 
 	const navigate = useNavigate();
 
@@ -39,13 +36,13 @@ const EditUserForm = ({ user }) => {
 
 	useEffect(() => {
 		console.log(isSuccess);
-		if (isSuccess || isDelSuccess) {
+		if (isSuccess || isSuccessDelete) {
 			setUsername("");
 			setPassword("");
 			setRoles([]);
 			navigate("/dash/users");
 		}
-	}, [isSuccess, isDelSuccess, navigate]);
+	}, [isSuccess, isSuccessDelete, navigate]);
 
 	const onUsernameChanged = (e) => setUsername(e.target.value);
 	const onPasswordChanged = (e) => setPassword(e.target.value);
@@ -79,18 +76,17 @@ const EditUserForm = ({ user }) => {
 
 	let canSave;
 	if (password) {
-		canSave =
-			[roles.length, validUsername, validPassword].every(Boolean) && !isLoading;
+		canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading;
 	} else {
 		canSave = [roles.length, validUsername].every(Boolean) && !isLoading;
 	}
 
-	const errClass = isError || isDelError ? "errmsg" : "offscreen";
+	const errClass = isError || isErrorDelete ? "errmsg" : "offscreen";
 	const validUserClass = !validUsername ? "form__input--incomplete" : "";
 	const validPwdClass = password && !validPassword ? "form__input--incomplete" : "";
 	const validRolesClass = !Boolean(roles.length) ? "form__input--incomplete" : "";
 
-	const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
+	const errContent = (error?.data?.message || errorDelete?.data?.message) ?? "";
 
 	const content = (
 		<>
@@ -143,10 +139,7 @@ const EditUserForm = ({ user }) => {
 					onChange={onPasswordChanged}
 				/>
 
-				<label
-					className="form__label form__checkbox-container"
-					htmlFor="user-active"
-				>
+				<label className="form__label form__checkbox-container" htmlFor="user-active">
 					ACTIVE:
 					<input
 						className="form__checkbox"

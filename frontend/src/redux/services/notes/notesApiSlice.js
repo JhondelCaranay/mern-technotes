@@ -3,7 +3,15 @@ import { apiSlice } from "../../app/api/apiSlice";
 
 const notesAdapter = createEntityAdapter({
 	// put completed in buttom
-	sortComparer: (a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1),
+	// sortComparer: (a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1),
+	// sort by completed and createdAt
+	sortComparer: (a, b) => {
+		if (a.completed === b.completed) {
+			return a.createdAt > b.createdAt ? -1 : 1;
+		} else {
+			return a.completed ? 1 : -1;
+		}
+	},
 });
 
 const initialState = notesAdapter.getInitialState({});

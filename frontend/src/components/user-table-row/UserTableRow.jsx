@@ -4,18 +4,9 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import {
-	selectAllUsers,
-	selectUserById,
-	selectUserIds,
-} from "../../redux/services/users/usersApiSlice";
+import { selectUserById } from "../../redux/services/users/usersApiSlice";
 
 const UserTableRow = ({ userId }) => {
-	// console.log("UserTableRow userId", userId);
-	// console.log("selectUserById", selectUserById);
-	// console.log("selectUserIds", selectUserIds);
-	// console.log("selectAllUsers", selectAllUsers);
-
 	const user = useSelector((state) => selectUserById(state, userId));
 
 	const navigate = useNavigate();
