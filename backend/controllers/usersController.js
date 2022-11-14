@@ -39,6 +39,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 
 	// hash password
 	const salt = await bcrypt.genSalt(10);
+	console.log(salt);
 	const hashedPwd = await bcrypt.hash(password, salt);
 
 	const userObject = {
@@ -65,12 +66,7 @@ const updateUser = asyncHandler(async (req, res) => {
 	const { username, password, roles, active } = req.body;
 
 	// confirm data
-	if (
-		!username ||
-		!Array.isArray(roles) ||
-		!roles.length ||
-		typeof active !== "boolean"
-	) {
+	if (!username || !Array.isArray(roles) || !roles.length || typeof active !== "boolean") {
 		return res.status(400).json({ message: "All fields are required" });
 	}
 
@@ -111,6 +107,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 	// Does the user still have assigned notes?
 	const note = await Note.findOne({ user: id }).lean().exec();
 	console.log({ note });
+
 	if (note) {
 		return res.status(400).json({ message: "User has assigned notes" });
 	}

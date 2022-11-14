@@ -6,7 +6,7 @@ dependencies
 npm i express           -- express 
 date-fns                -- date format
 uuid                    -- id generator (uuid format)
-cookir-parser           -- parse cookies
+cookie-parser           -- parse cookies
 cors                    -- Cross-Origin Resource Sharing
 dotenv                  -- environtment variables
 mongoose                -- mongoose database

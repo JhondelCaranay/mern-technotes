@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 
-router.all("^/$|/index(.html)?", (req, res) => {
+router.all("*", (req, res) => {
 	if (req.accepts("html")) {
 		res.status(404).sendFile(path.join(__dirname, "..", "views", "404.html"));
 	} else if (req.accepts("json")) {
