@@ -1,7 +1,8 @@
 const router = require("express").Router();
-
 const usersController = require("../controllers/usersController");
+const verifyJWT = require("../middlewares/verifyJWT");
 
+router.use(verifyJWT);
 router.get("/", usersController.getAllUsers);
 
 // router.get("/:id", usersController.getUserById);
