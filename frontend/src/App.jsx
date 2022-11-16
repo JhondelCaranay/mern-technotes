@@ -11,8 +11,13 @@ import CreateNote from "./pages/notes/create-note/CreateNote";
 import UpdateNote from "./pages/notes/update-note/UpdateNote";
 import UpdateUser from "./pages/users/update-user/UpdateUser";
 import Prefetch from "./redux/services/auth/Prefetch";
+import { useState } from "react";
 
 function App() {
+	const [isAuth, setIsAuth] = useState(false);
+
+	console.log(isAuth);
+
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />}>
