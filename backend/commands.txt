@@ -14,5 +14,15 @@ mongoose-sequence       -- auto increment id
 express-async-handler   -- simple middleware to wrap code with try catch and catch async errors
 bcrypt                  -- hash password or sensitive data
 
+express-rate-limit
+
+
 dev dependencies
 nodemon         -- reload page on save
+
+
+RELATED TO JWT - generate secret key
+    in terminal
+    > node
+    > require('crypto').randomBytes(64).toString('hex')
+        // this will generate a secret key

@@ -20,6 +20,7 @@ const NotesList = () => {
 
 	if (isError) {
 		content = <p className="errmsg">{error?.data?.message}</p>;
+		console.log("🚀 ~ file: NotesList.jsx ~ line 23 ~ NotesList ~ error", error)
 	}
 
 	if (isSuccess) {

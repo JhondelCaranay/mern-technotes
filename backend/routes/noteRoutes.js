@@ -1,6 +1,8 @@
 const router = require("express").Router();
-
 const notesController = require("../controllers/notesController");
+const verifyJWT = require("../middlewares/verifyJWT");
+
+router.use(verifyJWT); // all routes in this file will be protected
 
 router.get("/", notesController.getAllNotes);
 

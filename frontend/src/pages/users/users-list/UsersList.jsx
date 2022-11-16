@@ -29,7 +29,6 @@ const UsersList = () => {
 		refetchOnMountOrArgChange: true,
 	});
 
-	// console.log("UsersList users", users); // output: { ids: [...], entities: {...} }
 
 	let content;
 
