@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import EditUserForm from "../../../components/edit-user-form/EditUserForm";
-import { selectUserById } from "../../../redux/services/users/usersApiSlice";
+import EditUserForm from "../../components/edit-user-form/EditUserForm";
+import { selectUserById } from "../../redux/services/users/usersApiSlice";
 
 const UpdateUser = () => {
 	const { id } = useParams();

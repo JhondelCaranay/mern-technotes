@@ -1,22 +1,20 @@
 import { Route, Routes } from "react-router-dom";
 import DashLayout from "./components/dash-layout/DashLayout";
 import Layout from "./components/layout/Layout";
-import Login from "./pages/auth/login/Login";
-import NotesList from "./pages/notes/notes-list/NotesList";
+import Login from "./pages/auth/Login";
+import NotesList from "./pages/notes/NotesList";
 import Public from "./pages/public/Public";
-import UsersList from "./pages/users/users-list/UsersList";
-import Welcome from "./pages/auth/welcome/Welcome";
-import CreateUser from "./pages/users/create-user/CreateUser";
-import CreateNote from "./pages/notes/create-note/CreateNote";
-import UpdateNote from "./pages/notes/update-note/UpdateNote";
-import UpdateUser from "./pages/users/update-user/UpdateUser";
-import Prefetch from "./redux/services/auth/Prefetch";
-import { useState } from "react";
+import UsersList from "./pages/users/UsersList";
+import Welcome from "./pages/auth/Welcome";
+import CreateUser from "./pages/users/CreateUser";
+import CreateNote from "./pages/notes/CreateNote";
+import UpdateNote from "./pages/notes/UpdateNote";
+import UpdateUser from "./pages/users/UpdateUser";
+import Prefetch from "./guard/Prefetch";
+import PersistLogin from "./guard/PersistLogin";
+import { ROLES } from "./config/roles";
 
 function App() {
-	const [isAuth, setIsAuth] = useState(false);
-
-	console.log(isAuth);
 
 	return (
 		<Routes>
@@ -24,20 +22,27 @@ function App() {
 				<Route index element={<Public />} />
 				<Route path="login" element={<Login />} />
 			</Route>
-			<Route element={<Prefetch />}>
-				<Route path="/dash" element={<DashLayout />}>
-					<Route index element={<Welcome />} />
 
-					<Route path="users">
-						<Route index element={<UsersList />} />
-						<Route path="create" element={<CreateUser />} />
-						<Route path=":id" element={<UpdateUser />} />
-					</Route>
+			<Route element={<PersistLogin />}>
+				<Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
+					<Route element={<Prefetch />}>
+						<Route path="/dash" element={<DashLayout />}>
+							<Route index element={<Welcome />} />
 
-					<Route path="notes">
-						<Route index element={<NotesList />} />
-						<Route path="create" element={<CreateNote />} />
-						<Route path=":id" element={<UpdateNote />} />
+							<Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />}>
+								<Route path="users">
+									<Route index element={<UsersList />} />
+									<Route path="create" element={<CreateUser />} />
+									<Route path=":id" element={<UpdateUser />} />
+								</Route>
+							</Route>
+
+							<Route path="notes">
+								<Route index element={<NotesList />} />
+								<Route path="create" element={<CreateNote />} />
+								<Route path=":id" element={<UpdateNote />} />
+							</Route>
+						</Route>
 					</Route>
 				</Route>
 			</Route>
