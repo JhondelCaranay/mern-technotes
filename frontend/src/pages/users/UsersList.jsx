@@ -1,14 +1,16 @@
 import UserTableRow from "../../components/user-table-row/UserTableRow";
 import {
-	selectAllUsers,
-	selectTotalUsers,
-	selectUserEntities,
-	selectUserIds,
+	// selectAllUsers,
+	// selectTotalUsers,
+	// selectUserEntities,
+	// selectUserIds,
 	useGetUsersQuery,
 } from "../../redux/services/users/usersApiSlice";
-import { useSelector } from "react-redux";
-
+// import { useSelector } from "react-redux";
+import PulseLoader from 'react-spinners/PulseLoader'
+import useTitle from "../../hook/useTitle";
 const UsersList = () => {
+	useTitle('techNotes: Users List')
 	// const testselectAllUsers = useSelector((state) => selectAllUsers(state));
 	// console.log({ testselectAllUsers }); // selectAllUsers - Returns an array of all the entities in the state, sorted by their IDs.
 	// const testselectEntities = useSelector((state) => selectUserEntities(state));
@@ -32,9 +34,7 @@ const UsersList = () => {
 
 	let content;
 
-	if (isLoading) {
-		content = <p>Loading...</p>;
-	}
+	if (isLoading) content = <PulseLoader color={"#FFF"} />
 
 	if (isError) {
 		content = <p className="errmsg">{error?.data?.message}</p>;

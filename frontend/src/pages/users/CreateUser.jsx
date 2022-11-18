@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROLES } from "../../config/roles";
+import useTitle from "../../hook/useTitle";
 import { useAddNewUserMutation } from "../../redux/services/users/usersApiSlice";
 
 const USER_REGEX = /^[A-z]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 const CreateUser = () => {
+	useTitle('techNotes: New User')
 	const [addNewUser, { isLoading, isSuccess, isError, error }] = useAddNewUserMutation();
 
 	const navigate = useNavigate();
@@ -44,7 +46,7 @@ const CreateUser = () => {
 			e.target.selectedOptions, //HTMLCollection
 			(option) => option.value
 		);
-		console.log({ values });
+		// console.log({ values });
 		setRoles(values);
 	};
 

@@ -7,15 +7,18 @@ import { usersApiSlice } from "../redux/services/users/usersApiSlice";
 const Prefetch = () => {
 	// this will fetch all users and notes one time, when component is mounted
 	useEffect(() => {
-		console.log("subscribing");
-		const notes = store.dispatch(notesApiSlice.endpoints.getNotes.initiate());
-		const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
+		// console.log("subscribing");
+		// const notes = store.dispatch(notesApiSlice.endpoints.getNotes.initiate());
+		// const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
 
-		return () => {
-			console.log("unsubscribing");
-			notes.unsubscribe();
-			users.unsubscribe();
-		};
+		// return () => {
+		// 	console.log("unsubscribing");
+		// 	notes.unsubscribe();
+		// 	users.unsubscribe();
+		// };
+
+		store.dispatch(notesApiSlice.util.prefetch('getNotes', 'notesList', { force: true }))
+		store.dispatch(usersApiSlice.util.prefetch('getUsers', 'usersList', { force: true }))
 	}, []);
 
 	return <Outlet />;

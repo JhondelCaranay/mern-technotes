@@ -19,11 +19,13 @@ const initialState = notesAdapter.getInitialState({});
 export const notesApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getNotes: builder.query({
-			query: () => "/api/notes",
-			validateStatus: (response, result) => {
-				// validate the response status
-				return response.status === 200 && !result.IsError;
-			},
+			query: () => ({
+				url: "/api/notes",
+				validateStatus: (response, result) => { 	// validate the response status
+					return response.status === 200 && !result.IsError;
+				},
+			}),
+
 			// keepUnusedDataFor: import.meta.env.VITE_NODE_ENV === "development" ? 5 : 60, // keep unused data for 5 seconds for development, the defualt is 60 seconds
 			transformResponse: (response) => {
 				// transform the response data, use for sorting, filtering, etc.

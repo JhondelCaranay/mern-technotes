@@ -13,9 +13,11 @@ import UpdateUser from "./pages/users/UpdateUser";
 import Prefetch from "./guard/Prefetch";
 import PersistLogin from "./guard/PersistLogin";
 import { ROLES } from "./config/roles";
+import RequireAuth from "./guard/RequireAuth";
+import useTitle from "./hook/useTitle";
 
 function App() {
-
+	useTitle('Del Repair Shop');
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />}>
@@ -46,6 +48,9 @@ function App() {
 					</Route>
 				</Route>
 			</Route>
+
+			{/* 404 page */}
+			<Route path="*" element={<div>404</div>} />
 		</Routes>
 	);
 }

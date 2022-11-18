@@ -3,7 +3,7 @@ import { apiSlice } from "./api/apiSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import authReducer from "../features/auth/authSLice";
 
-const isDevMode = import.meta.env.VITE_MODE === "development" ? true : false;
+const isDevMode = import.meta.env.VITE_NODE_ENV === "production" ? false : true;
 
 export const store = configureStore({
 	reducer: {

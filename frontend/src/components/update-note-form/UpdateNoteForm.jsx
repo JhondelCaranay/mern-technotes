@@ -6,6 +6,7 @@ import {
 	useDeleteNoteMutation,
 	useUpdateNoteMutation,
 } from "../../redux/services/notes/notesApiSlice";
+import useAuth from "../../hook/useAuth";
 
 const UpdateNoteForm = ({ note, users }) => {
 	const { isManager, isAdmin } = useAuth()
