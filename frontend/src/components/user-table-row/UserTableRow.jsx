@@ -4,10 +4,16 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import { selectUserById } from "../../redux/services/users/usersApiSlice";
-
+import { selectUserById, useGetUsersQuery } from "../../redux/services/users/usersApiSlice";
+import { memo } from "react";
 const UserTableRow = ({ userId }) => {
-	const user = useSelector((state) => selectUserById(state, userId));
+	// const user = useSelector((state) => selectUserById(state, userId));
+
+	const { user } = useGetUsersQuery("usersList", {
+		selectFromResult: ({ data }) => ({
+			user: data?.entities[userId]
+		}),
+	})
 
 	const navigate = useNavigate();
 
@@ -36,4 +42,4 @@ const UserTableRow = ({ userId }) => {
 		);
 	} else return null;
 };
-export default UserTableRow;
+export default memo(UserTableRow);

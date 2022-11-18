@@ -1,9 +1,11 @@
 import NotesTableRow from "../../components/notes-table-row/NotesTableRow";
 import useAuth from "../../hook/useAuth";
 import { useGetNotesQuery } from "../../redux/services/notes/notesApiSlice";
+import PulseLoader from 'react-spinners/PulseLoader'
+import useTitle from "../../hook/useTitle";
 
 const NotesList = () => {
-
+	useTitle('techNotes: Notes List')
 	const { username, isManager, isAdmin } = useAuth()
 
 	const {
@@ -21,7 +23,7 @@ const NotesList = () => {
 
 	let content;
 
-	if (isLoading) content = <p>Loading...</p>;
+	if (isLoading) content = <PulseLoader color={"#FFF"} />
 
 	if (isError) {
 		content = <p className="errmsg">{error?.data?.message}</p>;

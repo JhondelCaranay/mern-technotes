@@ -12,11 +12,14 @@ const initialState = usersAdapter.getInitialState({});
 export const usersApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getUsers: builder.query({
-			query: () => "/api/users",
-			validateStatus: (response, result) => {
-				return response.status === 200 && !result.IsError;
-				// validateStatus - A function that can be used to validate the response status code. If the function returns false, the query will be rejected with an error. Defaults to checking if the status code is between 200 and 299.
-			},
+			query: () => ({
+				url: "/api/users",
+				validateStatus: (response, result) => {
+					return response.status === 200 && !result.isError
+					// validateStatus - A function that can be used to validate the response status code. If the function returns false, the query will be rejected with an error. Defaults to checking if the status code is between 200 and 299.
+
+				},
+			}),
 			// keepUnusedDataFor: import.meta.env.VITE_MODE === "dev" ? 5 : 60,
 			// keepUnusedDataFor - The number of seconds to keep unused data in the cache. Defaults to 60 seconds.
 			transformResponse: (responseData) => {
