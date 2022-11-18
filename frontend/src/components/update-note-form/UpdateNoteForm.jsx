@@ -8,6 +8,8 @@ import {
 } from "../../redux/services/notes/notesApiSlice";
 
 const UpdateNoteForm = ({ note, users }) => {
+	const { isManager, isAdmin } = useAuth()
+
 	const [updateNote, { isLoading, isSuccess, isError, error }] = useUpdateNoteMutation();
 
 	const [deleteNote, { isSuccess: isDelSuccess, isError: isDelError, error: delerror }] =
@@ -78,6 +80,20 @@ const UpdateNoteForm = ({ note, users }) => {
 
 	const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
+
+	let deleteButton = null
+	if (isManager || isAdmin) {
+		deleteButton = (
+			<button
+				className="icon-button"
+				title="Delete"
+				onClick={onDeleteNoteClicked}
+			>
+				<FontAwesomeIcon icon={faTrashCan} />
+			</button>
+		)
+	}
+
 	const content = (
 		<>
 			<p className={errClass}>{errContent}</p>
@@ -94,13 +110,14 @@ const UpdateNoteForm = ({ note, users }) => {
 						>
 							<FontAwesomeIcon icon={faSave} />
 						</button>
-						<button
+						{deleteButton}
+						{/* <button
 							className="icon-button"
-							title="Delete"
+							title="Delete" 
 							onClick={onDeleteNoteClicked}
 						>
 							<FontAwesomeIcon icon={faTrashCan} />
-						</button>
+						</button> */}
 					</div>
 				</div>
 				<label className="form__label" htmlFor="note-title">

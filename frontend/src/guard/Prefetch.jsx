@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { store } from "../../app/store";
-import { notesApiSlice } from "../notes/notesApiSlice";
-import { usersApiSlice } from "../users/usersApiSlice";
+import { store } from "../redux/app/store";
+import { notesApiSlice } from "../redux/services/notes/notesApiSlice";
+import { usersApiSlice } from "../redux/services/users/usersApiSlice";
 
 const Prefetch = () => {
 	// this will fetch all users and notes one time, when component is mounted

@@ -1,11 +1,11 @@
-import UserTableRow from "../../../components/user-table-row/UserTableRow";
+import UserTableRow from "../../components/user-table-row/UserTableRow";
 import {
 	selectAllUsers,
 	selectTotalUsers,
 	selectUserEntities,
 	selectUserIds,
 	useGetUsersQuery,
-} from "../../../redux/services/users/usersApiSlice";
+} from "../../redux/services/users/usersApiSlice";
 import { useSelector } from "react-redux";
 
 const UsersList = () => {
@@ -23,7 +23,7 @@ const UsersList = () => {
 		isLoading,
 		isSuccess,
 		isError,
-	} = useGetUsersQuery(undefined, {
+	} = useGetUsersQuery('usersList', {
 		pollingInterval: 60000,
 		refetchOnFocus: true,
 		refetchOnMountOrArgChange: true,
@@ -43,9 +43,12 @@ const UsersList = () => {
 	if (isSuccess) {
 		const { ids } = users;
 
-		const tableContent = ids?.length
-			? ids.map((userId) => <UserTableRow key={userId} userId={userId} />)
-			: null;
+		// const tableContent = ids?.length
+		// 	? ids.map((userId) => <UserTableRow key={userId} userId={userId} />)
+		// 	: null;
+
+		const tableContent = ids?.length && ids.map(userId => <UserTableRow key={userId} userId={userId} />)
+
 
 		content = (
 			<table className="table table--users">
